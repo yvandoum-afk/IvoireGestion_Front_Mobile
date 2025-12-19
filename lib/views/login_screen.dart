@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '');
+                    Navigator.pushNamed(context, '/signup');
                   },
                   child: const Text(
                     'Créer un compte',
@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const Text('Ou'),
                 TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '');
+                    Navigator.pushNamed(context, '/invitation');
                   },
                   child: const Text(
                     "J'ai un code d'invitation locataire",
