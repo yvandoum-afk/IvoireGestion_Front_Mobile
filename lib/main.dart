@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'views/home_screen.dart';
+import 'views/invitation_screen.dart';
 import 'views/login_screen.dart';
 import 'views/signup_screen.dart';
 import 'views/splash_screen.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         '/splash': (context) => const SplashScreen(),
         '/login': (context) => const LoginScreen(),
         '/signup': (context) => const SignupScreen(),
+        '/invitation': (context) => const InvitationScreen(),
         '/home': (context) => const HomeScreen(),
       },
       debugShowCheckedModeBanner: false,
