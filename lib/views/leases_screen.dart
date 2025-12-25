@@ -68,12 +68,12 @@ class _LeasesScreenState extends State<LeasesScreen> {
         elevation: 0,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () {},
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: const Icon(Icons.add),
+        //     onPressed: () {},
+        //   ),
+        // ],
       ),
       body: SingleChildScrollView(
         child: Padding(

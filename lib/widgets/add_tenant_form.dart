@@ -167,6 +167,24 @@ class _AddTenantFormState extends State<AddTenantForm> {
                 return null;
               },
             ),
+            const SizedBox(height: 16),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              margin: const EdgeInsets.only(bottom: 16),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade50,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Text(
+                ' Un code d\'invitation sera automatiquement généré et envoyé par SMS au locataire.',
+                style: TextStyle(
+                  color: Colors.grey.shade600,
+                  fontSize: 12,
+                ),
+              ),
+            ),
             const SizedBox(height: 24),
             // Buttons
             Row(

@@ -10,7 +10,7 @@ class PropertyScreen extends StatefulWidget {
 }
 
 class _PropertyScreenState extends State<PropertyScreen> {
-  void _showAddBienDialog() {
+  void _showAddPropertyDialog() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -76,7 +76,7 @@ class _PropertyScreenState extends State<PropertyScreen> {
           child: Column(
             children: [
               ElevatedButton(
-                onPressed: _showAddBienDialog,
+                onPressed: _showAddPropertyDialog,
                 style: ElevatedButton.styleFrom(
                   elevation: 0,
                   backgroundColor: const Color(0xFFF97316),
@@ -107,7 +107,7 @@ class _PropertyScreenState extends State<PropertyScreen> {
               const Text("Commencez par ajouter votre premier bien immobilier"),
               const SizedBox(height: 24),
               ElevatedButton(
-                onPressed: _showAddBienDialog,
+                onPressed: _showAddPropertyDialog,
                 style: ElevatedButton.styleFrom(
                   elevation: 0,
                   backgroundColor: const Color(0xFFF97316),

@@ -151,6 +151,24 @@ class _AddLeaseFormState extends State<AddLeaseForm> {
               },
             ),
             const SizedBox(height: 16),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              margin: const EdgeInsets.only(bottom: 16),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade50,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: Text(
+                'Note: Le logement est automatiquement attribué en fonction du locataire sélectionné. Assurez-vous d\'avoir assigné un logement au locataire avant de créer le bail.',
+                style: TextStyle(
+                  color: Colors.grey.shade600,
+                  fontSize: 12,
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
             // Date de début
             InkWell(
               onTap: _isLoading ? null : () => _selectDate(context, true),

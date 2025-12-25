@@ -10,7 +10,7 @@ class TenantsScreen extends StatefulWidget {
 }
 
 class _TenantsScreenState extends State<TenantsScreen> {
-  void _showAddLocataireDialog() {
+  void _showAddTenantDialog() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -32,7 +32,7 @@ class _TenantsScreenState extends State<TenantsScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      'Nouveau locataire',
+                      'Nouveau bail',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
@@ -69,12 +69,12 @@ class _TenantsScreenState extends State<TenantsScreen> {
         elevation: 0,
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: const Icon(Icons.search),
+        //     onPressed: () {},
+        //   ),
+        // ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -82,7 +82,7 @@ class _TenantsScreenState extends State<TenantsScreen> {
           child: Column(
             children: [
               ElevatedButton(
-                onPressed: _showAddLocataireDialog,
+                onPressed: _showAddTenantDialog,
                 style: ElevatedButton.styleFrom(
                   elevation: 0,
                   backgroundColor: const Color(0xFFF97316),
@@ -113,7 +113,7 @@ class _TenantsScreenState extends State<TenantsScreen> {
               const Text("Aucun locataire pour le moment"),
               const SizedBox(height: 24),
               ElevatedButton(
-                onPressed: _showAddLocataireDialog,
+                onPressed: _showAddTenantDialog,
                 style: ElevatedButton.styleFrom(
                   elevation: 0,
                   backgroundColor: const Color(0xFFF97316),
