@@ -1,31 +1,37 @@
 import 'package:flutter/material.dart';
 
-class AddPropertyForm extends StatefulWidget {
+class AddTenantForm extends StatefulWidget {
   final VoidCallback onSuccess;
 
-  const AddPropertyForm({
+  const AddTenantForm({
     super.key,
     required this.onSuccess,
   });
 
   @override
-  State<AddPropertyForm> createState() => _AddPropertyFormState();
+  State<AddTenantForm> createState() => _AddTenantFormState();
 }
 
-class _AddPropertyFormState extends State<AddPropertyForm> {
+class _AddTenantFormState extends State<AddTenantForm> {
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _addressController = TextEditingController();
-  final _cityController = TextEditingController();
-  final _descriptionController = TextEditingController();
+  final _fullnameController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _emailController = TextEditingController();
+  String? _selectedLogement;
   bool _isLoading = false;
+
+  // Mock list of logements - replace with actual data from API
+  final List<Map<String, dynamic>> _logements = [
+    {'id': '1', 'name': 'Appartement - Rue de la Paix'},
+    {'id': '2', 'name': 'Villa - Cocody'},
+    {'id': '3', 'name': 'Studio - Plateau'},
+  ];
 
   @override
   void dispose() {
-    _nameController.dispose();
-    _addressController.dispose();
-    _cityController.dispose();
-    _descriptionController.dispose();
+    _fullnameController.dispose();
+    _phoneController.dispose();
+    _emailController.dispose();
     super.dispose();
   }
 
@@ -36,17 +42,17 @@ class _AddPropertyFormState extends State<AddPropertyForm> {
       });
 
       try {
-        final name = _nameController.text.trim();
-        final address = _addressController.text.trim();
-        final city = _cityController.text.trim();
-        final description = _descriptionController.text.trim();
+        final fullname = _fullnameController.text.trim();
+        final phone = _phoneController.text.trim();
+        final email = _emailController.text.trim();
+        final logement = _selectedLogement;
 
-        // TODO: Call your API to create the property
-        // await propertyService.createProperty(name, address, city, description);
+        // TODO: Call your API to create the tenant
+        // await tenantService.createTenant(fullname, phone, email, logement);
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Bien créé avec succès'),
+              content: Text('Locataire créé avec succès'),
               backgroundColor: Colors.green,
             ),
           );
@@ -73,10 +79,10 @@ class _AddPropertyFormState extends State<AddPropertyForm> {
   }
 
   void _clearForm() {
-    _nameController.clear();
-    _addressController.clear();
-    _cityController.clear();
-    _descriptionController.clear();
+    _fullnameController.clear();
+    _phoneController.clear();
+    _emailController.clear();
+    _selectedLogement = null;
   }
 
   @override
@@ -87,52 +93,79 @@ class _AddPropertyFormState extends State<AddPropertyForm> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Nom du bien
+            // Nom complet
             _buildFormField(
-              controller: _nameController,
-              labelText: 'Nom du bien',
-              hintText: 'Ex: Appartement 2 chambres',
+              controller: _fullnameController,
+              labelText: 'Nom complet',
+              hintText: 'Ex: Jean Kouassi',
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
-                  return 'Veuillez entrer le nom du bien';
+                  return 'Veuillez entrer le nom complet';
                 }
                 return null;
               },
             ),
             const SizedBox(height: 16),
-            // Adresse
+            // Téléphone
             _buildFormField(
-              controller: _addressController,
-              labelText: 'Adresse',
-              hintText: 'Ex: Rue de la Paix, N°123',
+              controller: _phoneController,
+              labelText: 'Téléphone',
+              hintText: '+225 XX XX XX XX XX',
+              keyboardType: TextInputType.phone,
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
-                  return 'Veuillez entrer l\'adresse';
+                  return 'Veuillez entrer le numéro de téléphone';
                 }
                 return null;
               },
             ),
             const SizedBox(height: 16),
-            // Ville
+            // Email (optionnel)
             _buildFormField(
-              controller: _cityController,
-              labelText: 'Ville',
-              hintText: 'Ex: Abidjan',
+              controller: _emailController,
+              labelText: 'Email (optionnel)',
+              hintText: 'Ex: jean@example.com',
+              keyboardType: TextInputType.emailAddress,
               validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return 'Veuillez entrer la ville';
+                if (value != null && value.trim().isNotEmpty) {
+                  if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                      .hasMatch(value)) {
+                    return 'Veuillez entrer une adresse email valide';
+                  }
                 }
                 return null;
               },
             ),
             const SizedBox(height: 16),
-            // Description (optionnel)
-            _buildFormField(
-              controller: _descriptionController,
-              labelText: 'Description (optionnel)',
-              hintText: 'Décrivez votre bien...',
-              maxLines: 3,
-              validator: (value) => null,
+            // Logement à associer
+            DropdownButtonFormField<String>(
+              value: _selectedLogement,
+              decoration: InputDecoration(
+                labelText: 'Logement à associer',
+                hintText: 'Sélectionnez un logement',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              items: _logements.map((logement) {
+                return DropdownMenuItem<String>(
+                  value: logement['id'],
+                  child: Text(logement['name']),
+                );
+              }).toList(),
+              onChanged: _isLoading
+                  ? null
+                  : (value) {
+                      setState(() {
+                        _selectedLogement = value;
+                      });
+                    },
+              validator: (value) {
+                if (value == null) {
+                  return 'Veuillez sélectionner un logement';
+                }
+                return null;
+              },
             ),
             const SizedBox(height: 24),
             // Buttons
@@ -171,7 +204,7 @@ class _AddPropertyFormState extends State<AddPropertyForm> {
                               strokeWidth: 2,
                             ),
                           )
-                        : const Text('Créer'),
+                        : const Text('Créer le locataire'),
                   ),
                 ),
               ],
@@ -188,10 +221,12 @@ class _AddPropertyFormState extends State<AddPropertyForm> {
     required String hintText,
     required FormFieldValidator<String> validator,
     int maxLines = 1,
+    TextInputType keyboardType = TextInputType.text,
   }) {
     return TextFormField(
       controller: controller,
       enabled: !_isLoading,
+      keyboardType: keyboardType,
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
