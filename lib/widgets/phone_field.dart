@@ -27,21 +27,21 @@ class PhoneField extends StatefulWidget {
 class _PhoneFieldState extends State<PhoneField> {
   late String _selectedCountry;
 
-  // List of countries with their codes
+  // List of countries with their codes and flags
   final List<Map<String, String>> _countries = [
-    {'code': '+225', 'name': 'Côte d\'Ivoire (CI)'},
-    {'code': '+233', 'name': 'Ghana (GH)'},
-    {'code': '+234', 'name': 'Nigeria (NG)'},
-    {'code': '+230', 'name': 'Mauritius (MU)'},
-    {'code': '+212', 'name': 'Morocco (MA)'},
-    {'code': '+216', 'name': 'Tunisia (TN)'},
-    {'code': '+256', 'name': 'Uganda (UG)'},
-    {'code': '+254', 'name': 'Kenya (KE)'},
-    {'code': '+27', 'name': 'South Africa (ZA)'},
-    {'code': '+1', 'name': 'United States (US)'},
-    {'code': '+44', 'name': 'United Kingdom (GB)'},
-    {'code': '+33', 'name': 'France (FR)'},
-    {'code': '+49', 'name': 'Germany (DE)'},
+    {'code': '+225', 'name': 'Côte d\'Ivoire (CI)', 'flag': '🇨🇮'},
+    {'code': '+233', 'name': 'Ghana (GH)', 'flag': '🇬🇭'},
+    {'code': '+234', 'name': 'Nigeria (NG)', 'flag': '🇳🇬'},
+    {'code': '+230', 'name': 'Mauritius (MU)', 'flag': '🇲🇺'},
+    {'code': '+212', 'name': 'Morocco (MA)', 'flag': '🇲🇦'},
+    {'code': '+216', 'name': 'Tunisia (TN)', 'flag': '🇹🇳'},
+    {'code': '+256', 'name': 'Uganda (UG)', 'flag': '🇺🇬'},
+    {'code': '+254', 'name': 'Kenya (KE)', 'flag': '🇰🇪'},
+    {'code': '+27', 'name': 'South Africa (ZA)', 'flag': '🇿🇦'},
+    {'code': '+1', 'name': 'United States (US)', 'flag': '🇺🇸'},
+    {'code': '+44', 'name': 'United Kingdom (GB)', 'flag': '🇬🇧'},
+    {'code': '+33', 'name': 'France (FR)', 'flag': '🇫🇷'},
+    {'code': '+49', 'name': 'Germany (DE)', 'flag': '🇩🇪'},
   ];
 
   @override
@@ -87,11 +87,11 @@ class _PhoneFieldState extends State<PhoneField> {
                 items: _countries.map((country) {
                   return DropdownMenuItem<String>(
                     value: country['code'],
-                    child: Text(country['code']!),
+                    child: Text('${country['flag']} ${country['code']}'),
                   );
                 }).toList(),
                 underline: const SizedBox(),
-                padding: const EdgeInsets.symmetric(horizontal: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
               ),
             ),
             const SizedBox(width: 12),
