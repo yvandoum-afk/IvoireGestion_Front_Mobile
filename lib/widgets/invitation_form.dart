@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../viewmodels/invitation_viewmodel.dart';
 import '../views/home_screen.dart';
+import 'phone_field.dart';
 
 class InvitationForm extends StatefulWidget {
   const InvitationForm({super.key});
@@ -18,6 +19,7 @@ class _InvitationFormState extends State<InvitationForm> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
+  String _selectedCountryCode = '+225';
 
   @override
   void dispose() {
@@ -30,7 +32,7 @@ class _InvitationFormState extends State<InvitationForm> {
 
   Future<void> _submitForm(InvitationViewModel viewModel) async {
     if (_formKey.currentState?.validate() ?? false) {
-      final phone = _phoneController.text.trim();
+      final phone = '$_selectedCountryCode ${_phoneController.text.trim()}';
       final code = _codeController.text.trim();
       final email = _emailController.text.trim();
       final password = _passwordController.text;
@@ -129,29 +131,16 @@ class _InvitationFormState extends State<InvitationForm> {
                     ),
                   ),
                 // Téléphone field
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Numéro de téléphone',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                TextFormField(
-                  controller: _phoneController,
+                PhoneField(
+                  phoneController: _phoneController,
+                  labelText: 'Numéro de téléphone',
+                  hintText: 'XX XX XX XX XX',
                   enabled: !viewModel.isLoading,
-                  decoration: InputDecoration(
-                    hintText: '+225 XX XX XX XX XX',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                  ),
-                  keyboardType: TextInputType.phone,
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return 'Veuillez entrer votre numéro de téléphone';
-                    }
-                    return null;
+                  initialCountry: '+225',
+                  onCountryChanged: (countryCode) {
+                    setState(() {
+                      _selectedCountryCode = countryCode ?? '+225';
+                    });
                   },
                 ),
                 const SizedBox(height: 16),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'phone_field.dart';
+
 class AddTenantForm extends StatefulWidget {
   final VoidCallback onSuccess;
 
@@ -19,6 +21,7 @@ class _AddTenantFormState extends State<AddTenantForm> {
   final _emailController = TextEditingController();
   String? _selectedLogement;
   bool _isLoading = false;
+  String _selectedCountryCode = '+225';
 
   // Mock list of logements - replace with actual data from API
   final List<Map<String, dynamic>> _logements = [
@@ -43,7 +46,7 @@ class _AddTenantFormState extends State<AddTenantForm> {
 
       try {
         final fullname = _fullnameController.text.trim();
-        final phone = _phoneController.text.trim();
+        final phone = '$_selectedCountryCode ${_phoneController.text.trim()}';
         final email = _emailController.text.trim();
         final logement = _selectedLogement;
 
@@ -107,16 +110,16 @@ class _AddTenantFormState extends State<AddTenantForm> {
             ),
             const SizedBox(height: 16),
             // Téléphone
-            _buildFormField(
-              controller: _phoneController,
+            PhoneField(
+              phoneController: _phoneController,
               labelText: 'Téléphone',
-              hintText: '+225 XX XX XX XX XX',
-              keyboardType: TextInputType.phone,
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return 'Veuillez entrer le numéro de téléphone';
-                }
-                return null;
+              hintText: 'XX XX XX XX XX',
+              enabled: !_isLoading,
+              initialCountry: '+225',
+              onCountryChanged: (countryCode) {
+                setState(() {
+                  _selectedCountryCode = countryCode ?? '+225';
+                });
               },
             ),
             const SizedBox(height: 16),
