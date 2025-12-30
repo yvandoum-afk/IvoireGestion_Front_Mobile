@@ -77,7 +77,7 @@ class MoreMenuDrawer extends StatelessWidget {
               _buildDrawerItem(
                 context,
                 _DrawerItem(
-                  Icons.description,
+                  Icons.folder,
                   'Documents',
                   routeName: '/documents',
                 ),
