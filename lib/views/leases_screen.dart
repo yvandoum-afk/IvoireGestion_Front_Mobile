@@ -63,6 +63,7 @@ class _LeasesScreenState extends State<LeasesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Baux'),
         elevation: 0,

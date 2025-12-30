@@ -18,9 +18,6 @@ class MoreMenuDrawer extends StatelessWidget {
               Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                decoration: const BoxDecoration(
-                  color: Color(0xFFF97316),
-                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -28,13 +25,13 @@ class MoreMenuDrawer extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 32,
-                          backgroundColor: Colors.white,
+                          backgroundColor: Color(0xFFF97316),
                           child: Text(
                             'JK',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
-                              color: const Color(0xFFF97316),
+                              color: Colors.black,
                             ),
                           ),
                         ),
@@ -44,9 +41,9 @@ class MoreMenuDrawer extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Hello',
+                              'Hello  ',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400,
                               ),
@@ -55,7 +52,7 @@ class MoreMenuDrawer extends StatelessWidget {
                             Text(
                               'Jean Kouassi',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -68,7 +65,7 @@ class MoreMenuDrawer extends StatelessWidget {
                       onPressed: () => Navigator.pop(context),
                       icon: const Icon(
                         Icons.close,
-                        color: Colors.white,
+                        color: Colors.black,
                         size: 28,
                       ),
                     ),
@@ -76,60 +73,54 @@ class MoreMenuDrawer extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              _buildDrawerSection(
-                'Documents & Communication',
-                [
-                  _DrawerItem(
-                    Icons.description,
-                    'Documents',
-                    'Stockez vos documents',
-                  ),
-                  _DrawerItem(
-                    Icons.mail,
-                    'Messagerie',
-                    'Communiquez avec les locataires',
-                  ),
-                ],
+              // Documents & Communication section
+              _buildDrawerItem(
+                _DrawerItem(
+                  Icons.description,
+                  'Documents',
+                ),
               ),
-              _buildDrawerSection(
-                'Maintenance & Support',
-                [
-                  _DrawerItem(
-                    Icons.build,
-                    'Maintenance',
-                    'Signalez des problèmes',
-                  ),
-                  _DrawerItem(
-                    Icons.edit,
-                    'Demandes de modification',
-                    'Gérez les demandes',
-                  ),
-                ],
+              _buildDrawerItem(
+                _DrawerItem(
+                  Icons.mail,
+                  'Messagerie',
+                ),
               ),
-              _buildDrawerSection(
-                'Évaluations & Notifications',
-                [
-                  _DrawerItem(
-                    Icons.star,
-                    'Évaluations',
-                    'Consultez les avis',
-                  ),
-                  _DrawerItem(
-                    Icons.notifications,
-                    'Notifications',
-                    'Gérez vos alertes',
-                  ),
-                ],
+              const SizedBox(height: 16),
+              // Maintenance & Support section
+              _buildDrawerItem(
+                _DrawerItem(
+                  Icons.build,
+                  'Maintenance',
+                ),
               ),
-              _buildDrawerSection(
-                'Paramètres',
-                [
-                  _DrawerItem(
-                    Icons.settings,
-                    'Paramètres',
-                    'Configurez votre compte',
-                  ),
-                ],
+              _buildDrawerItem(
+                _DrawerItem(
+                  Icons.edit,
+                  'Demandes de modification',
+                ),
+              ),
+              const SizedBox(height: 16),
+              // Évaluations & Notifications section
+              _buildDrawerItem(
+                _DrawerItem(
+                  Icons.star,
+                  'Évaluations',
+                ),
+              ),
+              _buildDrawerItem(
+                _DrawerItem(
+                  Icons.notifications,
+                  'Notifications',
+                ),
+              ),
+              const SizedBox(height: 16),
+              // Paramètres section
+              _buildDrawerItem(
+                _DrawerItem(
+                  Icons.settings,
+                  'Paramètres',
+                ),
               ),
               const Divider(height: 32),
               Padding(
@@ -156,40 +147,21 @@ class MoreMenuDrawer extends StatelessWidget {
     );
   }
 
-  Widget _buildDrawerSection(String title, List<_DrawerItem> items) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
-          child: Text(
-            title,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFFF97316),
-            ),
-          ),
-        ),
-        ...items.map((item) => _buildDrawerItem(item)),
-      ],
-    );
-  }
-
   Widget _buildDrawerItem(_DrawerItem item) {
-    return ListTile(
-      leading: Icon(item.icon, color: const Color(0xFFF97316)),
-      title: Text(
-        item.title,
-        style: const TextStyle(fontWeight: FontWeight.w600),
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      elevation: 0,
+      color: Colors.grey.withOpacity(0.1),
+      child: ListTile(
+        leading: Icon(item.icon, color: const Color(0xFFF97316)),
+        title: Text(
+          item.title,
+        ),
+        trailing: const Icon(Icons.chevron_right, color: Color(0xFFF97316)),
+        onTap: () {
+          // Handle navigation
+        },
       ),
-      subtitle: Text(
-        item.subtitle,
-        style: const TextStyle(fontSize: 12),
-      ),
-      onTap: () {
-        // Handle navigation
-      },
     );
   }
 }
@@ -197,7 +169,6 @@ class MoreMenuDrawer extends StatelessWidget {
 class _DrawerItem {
   final IconData icon;
   final String title;
-  final String subtitle;
 
-  _DrawerItem(this.icon, this.title, this.subtitle);
+  _DrawerItem(this.icon, this.title);
 }
