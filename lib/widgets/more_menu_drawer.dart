@@ -75,51 +75,65 @@ class MoreMenuDrawer extends StatelessWidget {
               const SizedBox(height: 16),
               // Documents & Communication section
               _buildDrawerItem(
+                context,
                 _DrawerItem(
                   Icons.description,
                   'Documents',
+                  routeName: '/documents',
                 ),
               ),
               _buildDrawerItem(
+                context,
                 _DrawerItem(
                   Icons.mail,
                   'Messagerie',
+                  routeName: '/messaging',
                 ),
               ),
               const SizedBox(height: 16),
               // Maintenance & Support section
               _buildDrawerItem(
+                context,
                 _DrawerItem(
                   Icons.build,
                   'Maintenance',
+                  routeName: '/maintenance',
                 ),
               ),
               _buildDrawerItem(
+                context,
                 _DrawerItem(
                   Icons.edit,
                   'Demandes de modification',
+                  routeName: '/change-requests',
                 ),
               ),
               const SizedBox(height: 16),
               // Évaluations & Notifications section
               _buildDrawerItem(
+                context,
                 _DrawerItem(
                   Icons.star,
                   'Évaluations',
+                  routeName: '/ratings',
                 ),
               ),
               _buildDrawerItem(
+                context,
                 _DrawerItem(
                   Icons.notifications,
                   'Notifications',
+                  routeName: '/notifications',
                 ),
               ),
               const SizedBox(height: 16),
               // Paramètres section
               _buildDrawerItem(
+                context,
                 _DrawerItem(
                   Icons.settings,
                   'Paramètres',
+                  routeName: '/settings',
                 ),
               ),
               const Divider(height: 32),
@@ -147,7 +161,7 @@ class MoreMenuDrawer extends StatelessWidget {
     );
   }
 
-  Widget _buildDrawerItem(_DrawerItem item) {
+  Widget _buildDrawerItem(BuildContext context, _DrawerItem item) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       elevation: 0,
@@ -159,7 +173,10 @@ class MoreMenuDrawer extends StatelessWidget {
         ),
         trailing: const Icon(Icons.chevron_right, color: Color(0xFFF97316)),
         onTap: () {
-          // Handle navigation
+          Navigator.pop(context);
+          if (item.routeName != null) {
+            Navigator.pushNamed(context, item.routeName!);
+          }
         },
       ),
     );
@@ -169,6 +186,11 @@ class MoreMenuDrawer extends StatelessWidget {
 class _DrawerItem {
   final IconData icon;
   final String title;
+  final String? routeName;
 
-  _DrawerItem(this.icon, this.title);
+  _DrawerItem(
+    this.icon,
+    this.title, {
+    this.routeName,
+  });
 }
