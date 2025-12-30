@@ -13,8 +13,23 @@ class ChangeRequestsScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
       ),
-      body: const Center(
-        child: Text('Change Requests Screen'),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(Icons.edit_outlined, size: 64, color: Colors.grey.shade400),
+              const Text(
+                "Aucune demande trouvée",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(height: 12),
+              const Text("Aucune demande pour le moment"),
+            ],
+          ),
+        ),
       ),
     );
   }
