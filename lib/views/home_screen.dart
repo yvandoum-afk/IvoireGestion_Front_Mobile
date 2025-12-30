@@ -4,7 +4,7 @@ import '../widgets/custom_bottom_nav_bar.dart';
 import '../widgets/more_menu_drawer.dart';
 import 'dashboard_screen.dart';
 import 'leases_screen.dart';
-import 'more_screen.dart';
+import 'payments_screen.dart';
 import 'property_screen.dart';
 import 'tenants_screen.dart';
 
@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
       const PropertyScreen(),
       const TenantsScreen(),
       const LeasesScreen(),
-      const MoreScreen(),
+      const PaymentsScreen()
     ];
   }
 
@@ -47,10 +47,11 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _openRightMenu();
-        },
-        backgroundColor: const Color(0xFFF97316),
+        onPressed: _openRightMenu,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        hoverColor: null,
+        hoverElevation: 0,
         child: const Icon(Icons.menu),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,

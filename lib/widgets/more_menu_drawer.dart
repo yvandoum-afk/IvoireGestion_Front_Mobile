@@ -77,16 +77,6 @@ class MoreMenuDrawer extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               _buildDrawerSection(
-                'Gestion Financière',
-                [
-                  _DrawerItem(
-                    Icons.payment,
-                    'Paiements et facturation',
-                    'Gérez vos paiements',
-                  ),
-                ],
-              ),
-              _buildDrawerSection(
                 'Documents & Communication',
                 [
                   _DrawerItem(

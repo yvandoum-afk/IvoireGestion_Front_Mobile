@@ -60,9 +60,9 @@ class CustomBottomNavBar extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              currentIndex == 4 ? Icons.more_horiz : Icons.more_horiz_outlined,
+              currentIndex == 5 ? Icons.payment : Icons.payment_outlined,
             ),
-            label: 'Plus',
+            label: 'Paiements',
           ),
         ],
       ),
